@@ -42,11 +42,11 @@ class QueryUi extends React.Component {
       <>
         <h3>Input:</h3>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <textarea 
+          <textarea cols={50} rows={16}
             value={this.state.teleporterInput}
             onChange={(e) => this.handleInputChange(e)}
           />
-          <input type ="submit" value="Submit" />
+          <input className="btn-submit" type ="submit" value="Submit" />
         </form>
         <h3>Output:</h3>
         <p>{this.state.teleporterInput}</p>

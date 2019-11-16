@@ -5,3 +5,12 @@
 .edgeLabel {
   display: none;
 }
+
+form {
+  display: flex;
+  align-items: flex-start;
+}
+
+.btn-submit {
+  margin-left:10px;
+}
