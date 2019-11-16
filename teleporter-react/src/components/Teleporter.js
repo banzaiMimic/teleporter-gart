@@ -100,28 +100,6 @@ Teleporter.prototype.parseInput = function(input) {
   cityMap.map( m => this.addEdge(m[0], m[1]))
 }
 
-Teleporter.prototype.addTestData = function() {
-  this.addVertex('Fortuna')
-  this.addVertex('Hemingway')
-  this.addVertex('Atlantis')
-  this.addVertex('Chesterfield')
-  this.addVertex('Springton')
-  this.addVertex('Summerton')
-  this.addVertex('Paristown')
-  this.addVertex('Oaktown')
-  this.addVertex('Los Amigos')
-
-  this.addEdge('Fortuna', 'Hemingway')
-  this.addEdge('Fortuna', 'Atlantis')
-  this.addEdge('Hemingway', 'Chesterfield')
-  this.addEdge('Chesterfield', 'Springton')
-  this.addEdge('Los Amigos', 'Paristown')
-  this.addEdge('Paristown', 'Oaktown')
-  this.addEdge('Los Amigos', 'Oaktown')
-  this.addEdge('Summerton', 'Springton')
-  this.addEdge('Summerton', 'Hemingway')
-}
-
 Teleporter.prototype.clearData = function() {
   this.cityData = {
     cityList: new Set(),
