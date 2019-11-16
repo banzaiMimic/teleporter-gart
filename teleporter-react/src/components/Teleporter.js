@@ -17,6 +17,36 @@ Teleporter.prototype.getAdjacentFromList = function(cityList) {
   console.log('returning adjacentCities : ' , this.jump.cityList)
 }
 
+Teleporter.prototype.citiesConnect = function(origin, destination) {
+  this.search = true
+  let nodes = Object.keys(this.adjList)
+  const visited = {}
+  nodes = nodes.filter(city => city !== origin)
+  nodes.unshift(origin)
+  this.depthUtil(nodes[0], visited, destination)
+  // for( let i=0; i<nodes.length && this.search; i++) {
+  //   console.log('traversing remaining nodes... ' + i)
+  //   this.depthUtil(nodes[i], visited, destination)
+  // }
+  console.log('cities connect : ' + !this.search)
+}
+
+Teleporter.prototype.depthUtil = function(vertex, visited, destination) {
+  if(!visited[vertex]) {
+    visited[vertex] = true
+    console.log(vertex, visited)
+    const neighbors = this.adjList[vertex]
+    for( let i=0; i<neighbors.length && this.search; i++) {
+      console.log('neighbors : ' , neighbors)
+      if(neighbors.includes(destination)) {
+        console.log('found ' + destination + ' returning true...')
+        this.search = false
+      }
+      this.depthUtil(neighbors[i], visited, destination)
+    }
+  }
+}
+
 Teleporter.prototype.checkJumps = function(vertex, jumps) {
   this.jump.cityList.clear()
   this.jump.origin = vertex
@@ -25,6 +55,7 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
   console.log('adjacent nodes to ' + vertex + ' : ' + this.adjList[vertex])
 
   for( let i=0; i<jumps; i++) {
+    console.log('checkJumps loop:' + i + ': ajdList length is ' + this.adjList[vertex].length)
     if(i === 0) {
       this.adjList[vertex].map( c => this.jump.cityList.add(c))
     } else {
@@ -60,6 +91,7 @@ Teleporter.prototype.addDummyData = function() {
 
 export function Teleporter() {
   this.adjList = {}
+  this.search = false
   this.jump = {
     cityList: new Set(),
     origin: ''
