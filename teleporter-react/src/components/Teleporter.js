@@ -40,28 +40,19 @@ Teleporter.prototype.citiesConnectUtil = function(vertex, visited, destination) 
 Teleporter.prototype.loopPossible = function(origin) {
   this.cityData.origin = origin
   this.cityData.found = false
-  let nodes = Object.keys(this.cityData.adjList)
   const visited = {}
-  nodes = nodes.filter(city => city !== origin)
-  nodes.unshift(origin)
-  console.log('checking if loop possible from ', origin)
-  console.log('visited :', visited)
-  console.log('loop possible : ' + this.cityData.found)
-  this.loopPossibleUtil(nodes[0], visited, -1)
+  this.loopPossibleUtil(origin, visited, -1)
   return this.cityData.found
 }
 
 Teleporter.prototype.loopPossibleUtil = function(vertex, visited, parent) {
   visited[vertex] = true
-  console.log('visited : ', visited)
   this.cityData.adjList[vertex].map( (destination) => {
     if(!visited[destination]) {
-      console.log('heading to : ' + destination)
       visited[destination] = true
       return this.loopPossibleUtil(destination, visited, vertex)
     } else if (destination !== parent && destination === this.cityData.origin) {
       this.cityData.found = true
-      console.log('already visited ' + destination + ' that is equal to origin ' + this.cityData.origin + ' loop found ?')
       return true
     }
   })
