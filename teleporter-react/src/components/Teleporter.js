@@ -88,8 +88,9 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
       this.getAdjacentFromList([...this.jump.cityList])
     }
   }
-
+  console.log('typeof is : ' + typeof(this.jump.cityList))
   console.log('jumpList updated : ' , this.jump.cityList)
+  return this.jump.cityList
 
 }
 
