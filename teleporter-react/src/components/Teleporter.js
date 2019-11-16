@@ -112,15 +112,9 @@ Teleporter.prototype.parseInput = function(input) {
 }
 
 Teleporter.prototype.parseGraphData = function() {
-  console.log('parsing graph data...')
   const keys = Object.keys(this.cityData.adjList)
   let graphData = `graph LR;\n`
-  keys.map( key => {
-    console.log(this.cityData.adjList[key])
-    this.cityData.adjList[key].map( neighbor => {
-      graphData += `${this.cityData.cityKeys[key]}[${key}]-->${this.cityData.cityKeys[neighbor]}[${neighbor}];\n`
-    })
-  })
+  keys.map( key => this.cityData.adjList[key].map( neighbor => graphData += `${this.cityData.cityKeys[key]}[${key}]-->${this.cityData.cityKeys[neighbor]}[${neighbor}];\n`))
   return this.cityData.graphModel = graphData
 }
 

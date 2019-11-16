@@ -11,8 +11,6 @@ class GraphDisplay extends React.Component {
     mermaid.contentLoaded();
   }
   render() {
-    console.log('mermaid render')
-    mermaid.contentLoaded();
     return <div className="mermaid">{this.props.chart}</div>;
   }
 }

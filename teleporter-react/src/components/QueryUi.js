@@ -35,7 +35,6 @@ class QueryUi extends React.Component {
   }
 
   render() {
-    console.log('render')
     const output = this.state.output
     const data = this.state.graphModel
     return(
