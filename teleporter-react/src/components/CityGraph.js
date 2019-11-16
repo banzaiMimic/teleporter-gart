@@ -11,24 +11,16 @@ class GraphDisplay extends React.Component {
     mermaid.contentLoaded();
   }
   render() {
+    console.log('mermaid render')
+    mermaid.contentLoaded();
     return <div className="mermaid">{this.props.chart}</div>;
   }
 }
 
-export default function CityGraph() {
-  return (
-    <GraphDisplay
-        chart={`graph LR;
-                A[Fortuna]-->B[Hemingway];
-                A-->C[Atlantis];
-                B-->D[Chesterfield];
-                D-->E[Springton];
-                F[Los Amigos]-->G[Paristown];
-                G-->H[Oaktown];
-                F-->H;
-                I[Summerton]-->E;
-                I-->B;
-      `}
-      />
-  )
+export default function CityGraph(props) {
+  if(props.data) {
+    return <GraphDisplay chart={props.data}/>
+  } else {
+    return <></>
+  }
 }

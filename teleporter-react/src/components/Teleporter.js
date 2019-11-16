@@ -1,5 +1,6 @@
 Teleporter.prototype.addVertex = function(vertex) {
   this.cityData.adjList[vertex] = []
+  this.cityData.cityKeys[vertex] = Object.keys(this.cityData.cityKeys).length+1
 }
 
 Teleporter.prototype.addEdge = function(vertex0, vertex1) {
@@ -8,12 +9,12 @@ Teleporter.prototype.addEdge = function(vertex0, vertex1) {
 }
 
 Teleporter.prototype.getAdjacentCitiesFromList = function(cityList) {
-  this.cityData.cityListCacheSize = this.cityData.cityList.size
+  this.cityData.citiesJumpedCacheSize = this.cityData.citiesJumped.size
   cityList.map( (city) => 
     // if city is not our origin city, add it to our cityList Set
-    this.cityData.adjList[city].map( c => (c !== this.cityData.origin) ? this.cityData.cityList.add(c) : null)
+    this.cityData.adjList[city].map( c => (c !== this.cityData.origin) ? this.cityData.citiesJumped.add(c) : null)
     )
-  return this.cityData.cityList
+  return this.cityData.citiesJumped
 }
 
 Teleporter.prototype.citiesConnect = function(origin, destination) {
@@ -61,22 +62,22 @@ Teleporter.prototype.loopPossibleFromCityUtil = function(vertex, visited, parent
 }
 
 Teleporter.prototype.citiesWithinJumps = function(vertex, jumps) {
-  this.cityData.cityList.clear()
-  this.cityData.cityListCacheSize = 0
+  this.cityData.citiesJumped.clear()
+  this.cityData.citiesJumpedCacheSize = 0
   this.cityData.origin = vertex
 
   for( let i=0; i<jumps; i++) {
     if(i === 0) {
-      this.cityData.adjList[vertex].map( c => this.cityData.cityList.add(c))
+      this.cityData.adjList[vertex].map( c => this.cityData.citiesJumped.add(c))
     } else {
       // if no more adjacent nodes are being found, stop remaining jumps
-      if(this.cityData.cityListCacheSize === this.cityData.cityList.size) {
+      if(this.cityData.citiesJumpedCacheSize === this.cityData.citiesJumped.size) {
         break
       }
-      this.getAdjacentCitiesFromList([...this.cityData.cityList])
+      this.getAdjacentCitiesFromList([...this.cityData.citiesJumped])
     }
   }
-  return this.cityData.cityList
+  return this.cityData.citiesJumped
 }
 
 Teleporter.prototype.parseInput = function(input) {
@@ -110,6 +111,19 @@ Teleporter.prototype.parseInput = function(input) {
   return this.runQueries()
 }
 
+Teleporter.prototype.parseGraphData = function() {
+  console.log('parsing graph data...')
+  const keys = Object.keys(this.cityData.adjList)
+  let graphData = `graph LR;\n`
+  keys.map( key => {
+    console.log(this.cityData.adjList[key])
+    this.cityData.adjList[key].map( neighbor => {
+      graphData += `${this.cityData.cityKeys[key]}[${key}]-->${this.cityData.cityKeys[neighbor]}[${neighbor}];\n`
+    })
+  })
+  return this.cityData.graphModel = graphData
+}
+
 // populates this.output from queries ran from input
 Teleporter.prototype.runQueries = function() {
   this.output = []
@@ -121,11 +135,13 @@ Teleporter.prototype.runQueries = function() {
 
 Teleporter.prototype.clearData = function() {
   this.cityData = {
-    cityList: new Set(),
+    cityKeys: {},
+    citiesJumped: new Set(),
     adjList: {},
     cityListCacheSize: 0,
     found: false,
-    origin: ''
+    origin: '',
+    graphModel: ''
   }
   this.queryData = {
     citiesWithinJumps: [],
@@ -137,11 +153,13 @@ Teleporter.prototype.clearData = function() {
 
 export function Teleporter() {
   this.cityData = {
-    cityList: new Set(),
+    cityKeys: {},
+    citiesJumped: new Set(),
     adjList: {},
     cityListCacheSize: 0,
     found: false,
-    origin: ''
+    origin: '',
+    graphModel: ''
   }
   this.queryData = {
     citiesWithinJumps: [],
