@@ -5,11 +5,20 @@ import { Teleporter } from './Teleporter'
 class QueryUi extends React.Component {
 
   state = {
-    teleporter: null
+    teleporter: null,
+    teleporterInput: ''
   }
 
   componentDidMount() {
     this.createTeleporter()
+  }
+
+  handleInputChange(event) {
+    this.setState({ teleporterInput: event.target.value })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
   }
 
   createTeleporter() {
@@ -30,7 +39,18 @@ class QueryUi extends React.Component {
 
   render() {
     return(
-      <p>query ui</p>
+      <>
+        <h3>Input:</h3>
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <textarea 
+            value={this.state.teleporterInput}
+            onChange={(e) => this.handleInputChange(e)}
+          />
+          <input type ="submit" value="Submit" />
+        </form>
+        <h3>Output:</h3>
+        <p>{this.state.teleporterInput}</p>
+      </>
     )
   }
 }
