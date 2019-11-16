@@ -16,9 +16,5 @@ class GraphDisplay extends React.Component {
 }
 
 export default function CityGraph(props) {
-  if(props.data) {
-    return <GraphDisplay chart={props.data}/>
-  } else {
-    return <></>
-  }
+  return (props.data) ? <GraphDisplay chart={props.data}/> : <></>
 }
