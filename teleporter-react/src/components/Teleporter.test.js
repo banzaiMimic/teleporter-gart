@@ -51,8 +51,19 @@ test('citiesConnect:: Checking if cities Springton and Atlantis connect should r
 test('citiesConnect:: Checking if cities Oaktown and Atlantis connect should return false', () => {
   expect( teleporter.citiesConnect('Oaktown', 'Atlantis') ).toEqual(false)
 })
-/*
 
-this.state.teleporter.citiesConnect('Springton', 'Atlantis')
-this.state.teleporter.citiesConnect('Oaktown', 'Atlantis')
-      */
+test('loopPossible:: Checking if a loop is possible from Oaktown should return true', () => {
+  expect( teleporter.loopPossible('Oaktown') ).toEqual(true)
+})
+
+test('loopPossible:: Checking if a loop is possible from Fortuna should return false', () => {
+  expect( teleporter.loopPossible('Fortuna') ).toEqual(false)
+})
+
+test('loopPossible:: Checking if a loop is possible from D should return false', () => {
+  expect( teleporter.loopPossible('D') ).toEqual(false)
+})
+
+test('loopPossible:: Checking if a loop is possible from Chesterfield should return true', () => {
+  expect( teleporter.loopPossible('Chesterfield') ).toEqual(true)
+})

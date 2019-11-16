@@ -54,9 +54,10 @@ Teleporter.prototype.loopPossible = function(origin) {
   nodes = nodes.filter(city => city !== origin)
   nodes.unshift(origin)
   console.log('checking if loop possible from ', origin)
-  this.loopPossibleUtil(nodes[0], visited, -1)
   console.log('visited :', visited)
   console.log('loop possible : ' + !this.search)
+  this.loopPossibleUtil(nodes[0], visited, -1)
+  return !this.search
 }
 
 Teleporter.prototype.loopPossibleUtil = function(vertex, visited, parent) {
@@ -66,12 +67,14 @@ Teleporter.prototype.loopPossibleUtil = function(vertex, visited, parent) {
     if(!visited[destination]) {
       console.log('heading to : ' + destination)
       visited[destination] = true
-      this.loopPossibleUtil(destination, visited, vertex)
+      return this.loopPossibleUtil(destination, visited, vertex)
     } else if (destination !== parent && destination === this.jump.origin) {
       this.search = false
       console.log('already visited ' + destination + ' that is equal to origin ' + this.jump.origin + ' loop found ?')
+      return true
     }
   })
+  return false
 }
 
 Teleporter.prototype.checkJumps = function(vertex, jumps) {
