@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Teleporter } from './Teleporter'
 import CityGraph from './CityGraph'
+import ErrorMessage from './ErrorMessage'
 
 class QueryUi extends React.Component {
 
@@ -22,7 +23,9 @@ class QueryUi extends React.Component {
     event.preventDefault()
     this.setState( { 
       output: this.state.teleporter.parseInput(this.state.teleporterInput),
-      graphModel: this.state.teleporter.parseGraphData()
+      graphModel: this.state.teleporter.parseGraphData(),
+      showInstructions: false,
+      errorLine: ''
     }, () => {
       const err = this.state.teleporter.error.hasError
       if(err) {
@@ -47,6 +50,7 @@ class QueryUi extends React.Component {
   loadDefaultInput() {
     this.clear()
     this.setState({
+      showInstructions: false,
       teleporterInput: `Fortuna - Hemingway
 Fortuna - Atlantis
 Hemingway - Chesterfield
@@ -72,20 +76,7 @@ loop possible from Fortuna`
       <>
         <CityGraph data={data}/>
         <h3>Input:</h3>
-        {this.state.showInstructions && (
-          <>
-            <div className='warning-txt'>
-              <p>
-              Please correct input using the following formats: <br />
-              <span>CITYNAME</span> - <span>OTHERCITYNAME</span><br />
-              cities from <span>CITYNAME</span> in <span>#</span> jumps<br />
-              can I teleport from <span>CITYNAME</span> to <span>OTHERCITYNAME</span><br />
-              loop possible from <span>CITYNAME</span><br /><br />
-              error line [{this.state.errorLine}]
-              </p>
-            </div>
-          </>
-        )}
+        {this.state.showInstructions && <ErrorMessage errorLine={this.state.errorLine} />}
         <form>
           <textarea cols={50} rows={16}
             value={this.state.teleporterInput}
