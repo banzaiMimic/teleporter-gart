@@ -103,6 +103,9 @@ Teleporter.prototype.parseInput = function(input) {
       // loopPossibleFromCity
       let city = line.match(new RegExp('from\\s(\\w+)'))[1]
       this.queryData.loopPossibleFromCity.push(city)
+    } else {
+      this.error.hasError = true
+      this.error.line = line
     }
     return false
   })
@@ -143,6 +146,10 @@ Teleporter.prototype.clearData = function() {
     loopPossibleFromCity: []
   }
   this.output = []
+  this.error = {
+    hasError: false,
+    line: ''
+  }
 }
 
 export function Teleporter() {
@@ -161,4 +168,8 @@ export function Teleporter() {
     loopPossibleFromCity: []
   }
   this.output = []
+  this.error = {
+    hasError: false,
+    line: ''
+  }
 }

@@ -93,3 +93,11 @@ test('loopPossibleFromCity:: D', () => {
 test('loopPossibleFromCity:: Chesterfield', () => {
   expect( teleporter.loopPossibleFromCity('Chesterfield') ).toEqual(true)
 })
+
+test('input with incorrect formatting should store error information', () => {
+  teleporter.clearData()
+  const errInput = 'incorrect input format...'
+  teleporter.parseInput(errInput)
+  expect(teleporter.error.hasError).toEqual(true)
+  expect(teleporter.error.line).toEqual(errInput)
+})

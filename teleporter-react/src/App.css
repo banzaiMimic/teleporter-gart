@@ -20,3 +20,13 @@ ul {
   padding:0;
   line-height:2px;
 }
+
+.warning-txt {
+  font-weight: bold;
+  color: red;
+}
+
+.warning-txt span {
+  padding:0;
+  color: blue;
+}

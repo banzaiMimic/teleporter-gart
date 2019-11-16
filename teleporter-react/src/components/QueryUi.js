@@ -9,17 +9,29 @@ class QueryUi extends React.Component {
     teleporter: new Teleporter(),
     teleporterInput: '',
     output: [],
-    graphModel: ''
+    graphModel: '',
+    showInstructions: false,
+    errorLine: ''
   }
 
   onInputChange(event) {
     this.setState({ teleporterInput: event.target.value })
   }
 
-  submit() {
+  submit(event) {
+    event.preventDefault()
     this.setState( { 
       output: this.state.teleporter.parseInput(this.state.teleporterInput),
       graphModel: this.state.teleporter.parseGraphData()
+    }, () => {
+      const err = this.state.teleporter.error.hasError
+      if(err) {
+        this.setState({ 
+          showInstructions: true,
+          errorLine: this.state.teleporter.error.line
+        })
+        this.clear()
+      }
     } )
   }
 
@@ -60,12 +72,26 @@ loop possible from Fortuna`
       <>
         <CityGraph data={data}/>
         <h3>Input:</h3>
+        {this.state.showInstructions && (
+          <>
+            <div className='warning-txt'>
+              <p>
+              Please correct input using the following formats: <br />
+              <span>CITYNAME</span> - <span>OTHERCITYNAME</span><br />
+              cities from <span>CITYNAME</span> in <span>#</span> jumps<br />
+              can I teleport from <span>CITYNAME</span> to <span>OTHERCITYNAME</span><br />
+              loop possible from <span>CITYNAME</span><br /><br />
+              error line [{this.state.errorLine}]
+              </p>
+            </div>
+          </>
+        )}
         <form>
           <textarea cols={50} rows={16}
             value={this.state.teleporterInput}
             onChange={(e) => this.onInputChange(e)}
           />
-          {this.state.output.length === 0 && <input onClick={() => this.submit()} className="btn-submit" type="submit" value="Submit" />}
+          {this.state.output.length === 0 && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
         </form>
         <input onClick={() => this.clear()} className="btn-submit" type="submit" value="Clear" />
         <input onClick={() => this.loadDefaultInput()} className="btn-submit" type="submit" value="Load Default Input" />
