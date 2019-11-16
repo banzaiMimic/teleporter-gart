@@ -19,9 +19,6 @@ export default function CityGraph() {
   return (
     <GraphDisplay
         chart={`graph LR;
-M[E]-->L[D];
-L-->K[C];
-K-->J[B];
 A[Fortuna]-->B[Hemingway];
 A-->C[Atlantis];
 B-->D[Chesterfield];

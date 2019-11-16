@@ -78,7 +78,7 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
   return this.cityData.cityList
 }
 
-Teleporter.prototype.addDummyData = function() {
+Teleporter.prototype.addTestData = function() {
   this.addVertex('Fortuna')
   this.addVertex('Hemingway')
   this.addVertex('Atlantis')
@@ -88,15 +88,6 @@ Teleporter.prototype.addDummyData = function() {
   this.addVertex('Paristown')
   this.addVertex('Oaktown')
   this.addVertex('Los Amigos')
-
-  //custom
-  this.addVertex('B')
-  this.addVertex('C')
-  this.addVertex('D')
-  this.addVertex('E')
-  this.addEdge('B', 'C')
-  this.addEdge('C', 'D')
-  this.addEdge('D', 'E')
 
   this.addEdge('Fortuna', 'Hemingway')
   this.addEdge('Fortuna', 'Atlantis')
