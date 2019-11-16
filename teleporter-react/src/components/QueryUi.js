@@ -6,7 +6,8 @@ class QueryUi extends React.Component {
 
   state = {
     teleporter: new Teleporter(),
-    teleporterInput: ''
+    teleporterInput: '',
+    output: []
   }
 
   handleInputChange(event) {
@@ -15,10 +16,11 @@ class QueryUi extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.state.teleporter.parseInput(this.state.teleporterInput)
+    this.setState( { output: this.state.teleporter.parseInput(this.state.teleporterInput) } )
   }
 
   render() {
+    const output = this.state.output
     return(
       <>
         <h3>Input:</h3>
@@ -30,7 +32,11 @@ class QueryUi extends React.Component {
           <input className="btn-submit" type ="submit" value="Submit" />
         </form>
         <h3>Output:</h3>
-        <p>{this.state.teleporterInput}</p>
+        <ul>
+          {output.map((line, idx) => (
+            <li key={idx}>{line}</li>
+          ))}
+        </ul>
       </>
     )
   }

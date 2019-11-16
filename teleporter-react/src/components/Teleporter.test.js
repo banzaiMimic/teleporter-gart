@@ -13,6 +13,12 @@ Summerton - Hemingway
 B - C
 C - D
 D - E
+cities from Summerton in 1 jumps
+cities from Summerton in 2 jumps
+can I teleport from Springton to Atlantis
+can I teleport from Oaktown to Atlantis
+loop possible from Oaktown
+loop possible from Fortuna
 ` 
 
 beforeAll( () => {

@@ -14,3 +14,9 @@ form {
 .btn-submit {
   margin-left:10px;
 }
+
+ul {
+  list-style-type: none;
+  padding:0;
+  line-height:2px;
+}

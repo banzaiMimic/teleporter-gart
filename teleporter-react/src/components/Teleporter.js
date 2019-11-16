@@ -89,15 +89,35 @@ Teleporter.prototype.parseInput = function(input) {
       edge.map( c => cities.add(c) )
       cityMap.push(edge)
     } else if(line.includes('cities')) {
-      
+      // citiesWithinJumps
+      let city = line.match(new RegExp('from\\s(\\w+)'))[1]
+      let jumps = line.match(new RegExp('in\\s(\\w+)'))[1]
+      this.queryData.citiesWithinJumps.push([city, jumps])
     } else if(line.includes('can')) {
-      
+      // citiesConnect
+      let from = line.match(new RegExp('from\\s(\\w+)'))[1]
+      let to = line.match(new RegExp('to\\s(\\w+)'))[1]
+      this.queryData.citiesConnect.push([from, to])
+    } else if(line.includes('loop')) {
+      // loopPossibleFromCity
+      let city = line.match(new RegExp('from\\s(\\w+)'))[1]
+      this.queryData.loopPossibleFromCity.push(city)
     }
     return false
   })
   cities.forEach( c => this.addVertex(c))
   cityMap.map( m => this.addEdge(m[0], m[1]))
-  console.log('input parsed:',this.cityData.adjList)
+  return this.runQueries()
+}
+
+// populates this.output from queries ran from input
+Teleporter.prototype.runQueries = function() {
+  this.output = []
+  this.queryData.citiesWithinJumps.map( cwjQuery => this.output.push( `cities from ${cwjQuery[0]} in ${cwjQuery[1]} jumps: ${[...this.citiesWithinJumps(cwjQuery[0], cwjQuery[1])]}`))
+  this.queryData.citiesConnect.map( ccQuery => this.output.push( `can I teleport from ${ccQuery[0]} to ${ccQuery[1]}: ${this.citiesConnect(ccQuery[0], ccQuery[1]) ? 'yes' : 'no'}`))
+  this.queryData.loopPossibleFromCity.map( lpQuery => this.output.push( `loop possible from ${lpQuery}: ${this.loopPossibleFromCity(lpQuery) ? 'yes' : 'no'}`))
+  console.log('queries ran- output:',this.output)
+  return this.output
 }
 
 Teleporter.prototype.clearData = function() {
@@ -108,6 +128,12 @@ Teleporter.prototype.clearData = function() {
     found: false,
     origin: ''
   }
+  this.queryData = {
+    citiesWithinJumps: [],
+    citiesConnect: [],
+    loopPossibleFromCity: []
+  }
+  this.output = []
 }
 
 export function Teleporter() {
@@ -118,4 +144,10 @@ export function Teleporter() {
     found: false,
     origin: ''
   }
+  this.queryData = {
+    citiesWithinJumps: [],
+    citiesConnect: [],
+    loopPossibleFromCity: []
+  }
+  this.output = []
 }
