@@ -7,7 +7,7 @@ Teleporter.prototype.addEdge = function(vertex0, vertex1) {
   this.cityData.adjList[vertex1].push(vertex0)
 }
 
-Teleporter.prototype.getAdjacentFromList = function(cityList) {
+Teleporter.prototype.getAdjacentCitiesFromList = function(cityList) {
   this.cityData.cityListCacheSize = this.cityData.cityList.size
   cityList.map( (city) => 
     // if city is not our origin city, add it to our cityList Set
@@ -18,22 +18,16 @@ Teleporter.prototype.getAdjacentFromList = function(cityList) {
 
 Teleporter.prototype.citiesConnect = function(origin, destination) {
   this.cityData.found = false
-  let nodes = Object.keys(this.cityData.adjList)
   const visited = {}
-  nodes = nodes.filter(city => city !== origin)
-  nodes.unshift(origin)
-  return this.citiesConnectUtil(nodes[0], visited, destination)
+  return this.citiesConnectUtil(origin, visited, destination)
 }
 
 Teleporter.prototype.citiesConnectUtil = function(vertex, visited, destination) {
   if(!visited[vertex]) {
     visited[vertex] = true
-    console.log(vertex, visited)
     const neighbors = this.cityData.adjList[vertex]
     for( let i=0; i<neighbors.length && !this.cityData.found; i++) {
-      console.log('neighbors : ' , neighbors)
       if(neighbors.includes(destination)) {
-        console.log('found ' + destination + ' returning true...')
         this.cityData.found = true
         return true
       } 
@@ -87,7 +81,7 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
       if(this.cityData.cityListCacheSize === this.cityData.cityList.size) {
         break
       }
-      this.getAdjacentFromList([...this.cityData.cityList])
+      this.getAdjacentCitiesFromList([...this.cityData.cityList])
     }
   }
   return this.cityData.cityList

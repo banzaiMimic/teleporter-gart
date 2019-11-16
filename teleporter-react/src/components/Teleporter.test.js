@@ -32,29 +32,25 @@ beforeAll( () => {
   teleporter.addEdge('Summerton', 'Hemingway')
 })
 
-test('updating jumps method', () => {
-  teleporter.checkJumps('Summerton',7)
+test('checkJumps:: Cities within 1 jump of Summerton should return Springton and Hemingway', () => {
+  const expected = new Set(['Springton', 'Hemingway'])
+  const result = teleporter.checkJumps('Summerton',1)
+  expect(result).toEqual(expected)
 })
 
-// test('checkJumps:: Cities within 1 jump of Summerton should return Springton and Hemingway', () => {
-//   const expected = new Set(['Springton', 'Hemingway'])
-//   const result = teleporter.checkJumps('Summerton',1)
-//   expect(result).toEqual(expected)
-// })
+test('checkJumps:: Cities within 2 jumps of Summerton should return Springton, Hemingway, Chesterfield, Fortuna', () => {
+  const expected = new Set(['Springton', 'Hemingway', 'Chesterfield', 'Fortuna'])
+  const result = teleporter.checkJumps('Summerton',2)
+  expect(result).toEqual(expected)
+})
 
-// test('checkJumps:: Cities within 2 jumps of Summerton should return Springton, Hemingway, Chesterfield, Fortuna', () => {
-//   const expected = new Set(['Springton', 'Hemingway', 'Chesterfield', 'Fortuna'])
-//   const result = teleporter.checkJumps('Summerton',2)
-//   expect(result).toEqual(expected)
-// })
+test('citiesConnect:: Checking if cities Springton and Atlantis connect should return true', () => {
+  expect( teleporter.citiesConnect('Springton', 'Atlantis') ).toEqual(true)
+})
 
-// test('citiesConnect:: Checking if cities Springton and Atlantis connect should return true', () => {
-//   expect( teleporter.citiesConnect('Springton', 'Atlantis') ).toEqual(true)
-// })
-
-// test('citiesConnect:: Checking if cities Oaktown and Atlantis connect should return false', () => {
-//   expect( teleporter.citiesConnect('Oaktown', 'Atlantis') ).toEqual(false)
-// })
+test('citiesConnect:: Checking if cities Oaktown and Atlantis connect should return false', () => {
+  expect( teleporter.citiesConnect('Oaktown', 'Atlantis') ).toEqual(false)
+})
 
 // test('loopPossible:: Checking if a loop is possible from Oaktown should return true', () => {
 //   expect( teleporter.loopPossible('Oaktown') ).toEqual(true)
