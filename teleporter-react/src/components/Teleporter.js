@@ -8,13 +8,12 @@ Teleporter.prototype.addEdge = function(vertex0, vertex1) {
 }
 
 Teleporter.prototype.getAdjacentFromList = function(cityList) {
-  cityList.map( (city) => {
-    console.log('adjacent cities to : ' + city + ' : ' + this.cityData.adjList[city])
-    return this.cityData.adjList[city].map( c => {
-      return (c !== this.cityData.origin) ? this.cityData.cityList.add(c) : null
-    })
-  })
-  console.log('returning adjacentCities : ' , this.cityData.cityList)
+  this.cityData.cityListCacheSize = this.cityData.cityList.size
+  cityList.map( (city) => 
+    // if city is not our origin city, add it to our cityList Set
+    this.cityData.adjList[city].map( c => (c !== this.cityData.origin) ? this.cityData.cityList.add(c) : null)
+    )
+  return this.cityData.cityList
 }
 
 Teleporter.prototype.citiesConnect = function(origin, destination) {
@@ -77,21 +76,20 @@ Teleporter.prototype.loopPossibleUtil = function(vertex, visited, parent) {
 
 Teleporter.prototype.checkJumps = function(vertex, jumps) {
   this.cityData.cityList.clear()
+  this.cityData.cityListCacheSize = 0
   this.cityData.origin = vertex
-  console.log('---')
-  console.log('checkJumps:: ' + jumps + ' max jumps from ' + vertex + '...')
-  console.log('adjacent nodes to ' + vertex + ' : ' + this.cityData.adjList[vertex])
 
   for( let i=0; i<jumps; i++) {
-    console.log('checkJumps loop:' + i + ': ajdList length is ' + this.cityData.adjList[vertex].length)
     if(i === 0) {
       this.cityData.adjList[vertex].map( c => this.cityData.cityList.add(c))
     } else {
+      // if no more adjacent nodes are being found, stop remaining jumps
+      if(this.cityData.cityListCacheSize === this.cityData.cityList.size) {
+        break
+      }
       this.getAdjacentFromList([...this.cityData.cityList])
     }
   }
-  console.log('typeof is : ' + typeof(this.cityData.cityList))
-  console.log('jumpList updated : ' , this.cityData.cityList)
   return this.cityData.cityList
 
 }
@@ -131,6 +129,7 @@ export function Teleporter() {
   this.cityData = {
     cityList: new Set(),
     adjList: {},
+    cityListCacheSize: 0,
     found: false,
     origin: ''
   }
