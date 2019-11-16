@@ -1,35 +1,45 @@
 import { Teleporter } from './Teleporter'
 
 const teleporter = new Teleporter()
+const testInput = `Fortuna - Hemingway
+Fortuna - Atlantis
+Hemingway - Chesterfield
+Chesterfield - Springton
+Los Amigos - Paristown
+Paristown - Oaktown
+Los Amigos - Oaktown
+Summerton - Springton
+Summerton - Hemingway
+B - C
+C - D
+D - E
+` 
 
 beforeAll( () => {
   // populate teleporter with test data
-  teleporter.addVertex('Fortuna')
-  teleporter.addVertex('Hemingway')
-  teleporter.addVertex('Atlantis')
-  teleporter.addVertex('Chesterfield')
-  teleporter.addVertex('Springton')
-  teleporter.addVertex('Summerton')
-  teleporter.addVertex('Paristown')
-  teleporter.addVertex('Oaktown')
-  teleporter.addVertex('Los Amigos')
-  teleporter.addVertex('B')
-  teleporter.addVertex('C')
-  teleporter.addVertex('D')
-  teleporter.addVertex('E')
+  teleporter.parseInput(testInput)
+})
 
-  teleporter.addEdge('B', 'C')
-  teleporter.addEdge('C', 'D')
-  teleporter.addEdge('D', 'E')
-  teleporter.addEdge('Fortuna', 'Hemingway')
-  teleporter.addEdge('Fortuna', 'Atlantis')
-  teleporter.addEdge('Hemingway', 'Chesterfield')
-  teleporter.addEdge('Chesterfield', 'Springton')
-  teleporter.addEdge('Los Amigos', 'Paristown')
-  teleporter.addEdge('Paristown', 'Oaktown')
-  teleporter.addEdge('Los Amigos', 'Oaktown')
-  teleporter.addEdge('Summerton', 'Springton')
-  teleporter.addEdge('Summerton', 'Hemingway')
+afterAll( () => {
+  teleporter.clearData()
+})
+
+test('parseInput:: initial citymap test data', () => {
+  let expectedAdjList = {}
+  expectedAdjList['Fortuna'] = ['Hemingway', 'Atlantis']
+  expectedAdjList['Hemingway'] = ['Fortuna', 'Chesterfield', 'Summerton']
+  expectedAdjList['Atlantis'] = ['Fortuna']
+  expectedAdjList['B'] = ['C']
+  expectedAdjList['C'] = ['B', 'D']
+  expectedAdjList['Chesterfield'] = ['Hemingway', 'Springton']
+  expectedAdjList['D'] = ['C', 'E']
+  expectedAdjList['E'] = ['D']
+  expectedAdjList['Springton'] = ['Chesterfield', 'Summerton']
+  expectedAdjList['Los Amigos'] = ['Paristown', 'Oaktown']
+  expectedAdjList['Paristown'] = ['Los Amigos', 'Oaktown']
+  expectedAdjList['Oaktown'] = ['Paristown', 'Los Amigos']
+  expectedAdjList['Summerton'] = ['Springton', 'Hemingway']
+  expect(teleporter.cityData.adjList).toEqual(expectedAdjList)
 })
 
 test('checkJumps:: 1 jump of Summerton', () => {

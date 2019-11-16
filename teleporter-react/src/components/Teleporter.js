@@ -55,6 +55,7 @@ Teleporter.prototype.loopPossibleFromCityUtil = function(vertex, visited, parent
       this.cityData.found = true
       return true
     }
+    return false
   })
   return false
 }
@@ -78,6 +79,27 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
   return this.cityData.cityList
 }
 
+Teleporter.prototype.parseInput = function(input) {
+  console.log('parsing input ', input)
+  const lines = input.split('\n')
+  let cities = new Set()
+  let cityMap = []
+  lines.map( (line) => {
+    if (line.includes('-')) {
+      const edge = line.split(' - ')
+      edge.map( c => cities.add(c) )
+      cityMap.push(edge)
+    } else if(line.includes('cities')) {
+      
+    } else if(line.includes('can')) {
+      
+    }
+    return false
+  })
+  cities.forEach( c => this.addVertex(c))
+  cityMap.map( m => this.addEdge(m[0], m[1]))
+}
+
 Teleporter.prototype.addTestData = function() {
   this.addVertex('Fortuna')
   this.addVertex('Hemingway')
@@ -98,6 +120,16 @@ Teleporter.prototype.addTestData = function() {
   this.addEdge('Los Amigos', 'Oaktown')
   this.addEdge('Summerton', 'Springton')
   this.addEdge('Summerton', 'Hemingway')
+}
+
+Teleporter.prototype.clearData = function() {
+  this.cityData = {
+    cityList: new Set(),
+    adjList: {},
+    cityListCacheSize: 0,
+    found: false,
+    origin: ''
+  }
 }
 
 export function Teleporter() {

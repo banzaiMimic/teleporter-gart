@@ -5,12 +5,8 @@ import { Teleporter } from './Teleporter'
 class QueryUi extends React.Component {
 
   state = {
-    teleporter: null,
+    teleporter: new Teleporter(),
     teleporterInput: ''
-  }
-
-  componentDidMount() {
-    this.createTeleporter()
   }
 
   handleInputChange(event) {
@@ -19,22 +15,7 @@ class QueryUi extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-  }
-
-  createTeleporter() {
-    
-    let teleporter = new Teleporter()
-    teleporter.addTestData()
-    this.setState( { teleporter }, () => {
-      console.log('Teleporter set : ' , this.state.teleporter)
-      //this.state.teleporter.checkJumps('Summerton', 1)
-      //this.state.teleporter.checkJumps('Summerton', 2)
-      //this.state.teleporter.citiesConnect('Springton', 'Atlantis')
-      //this.state.teleporter.citiesConnect('Oaktown', 'Atlantis')
-      //this.state.teleporter.loopPossible('Oaktown')
-      //this.state.teleporter.loopPossible('Fortuna')
-    })
-    
+    this.state.teleporter.parseInput(this.state.teleporterInput)
   }
 
   render() {
