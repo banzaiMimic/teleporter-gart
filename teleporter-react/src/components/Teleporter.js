@@ -116,7 +116,6 @@ Teleporter.prototype.runQueries = function() {
   this.queryData.citiesWithinJumps.map( cwjQuery => this.output.push( `cities from ${cwjQuery[0]} in ${cwjQuery[1]} jumps: ${[...this.citiesWithinJumps(cwjQuery[0], cwjQuery[1])]}`))
   this.queryData.citiesConnect.map( ccQuery => this.output.push( `can I teleport from ${ccQuery[0]} to ${ccQuery[1]}: ${this.citiesConnect(ccQuery[0], ccQuery[1]) ? 'yes' : 'no'}`))
   this.queryData.loopPossibleFromCity.map( lpQuery => this.output.push( `loop possible from ${lpQuery}: ${this.loopPossibleFromCity(lpQuery) ? 'yes' : 'no'}`))
-  console.log('queries ran- output:',this.output)
   return this.output
 }
 

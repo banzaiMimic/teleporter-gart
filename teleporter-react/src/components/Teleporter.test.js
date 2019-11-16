@@ -48,6 +48,16 @@ test('parseInput:: initial citymap test data', () => {
   expect(teleporter.cityData.adjList).toEqual(expectedAdjList)
 })
 
+test('runQueries:: queries run and output correctly', () => {
+  const expectedOutput = [ 'cities from Summerton in 1 jumps: Springton,Hemingway',
+  'cities from Summerton in 2 jumps: Springton,Hemingway,Chesterfield,Fortuna',
+  'can I teleport from Springton to Atlantis: yes',
+  'can I teleport from Oaktown to Atlantis: no',
+  'loop possible from Oaktown: yes',
+  'loop possible from Fortuna: no' ]
+  expect(teleporter.output).toEqual(expectedOutput)
+})
+
 test('citiesWithinJumps:: 1 jump of Summerton', () => {
   const expected = new Set(['Springton', 'Hemingway'])
   const result = teleporter.citiesWithinJumps('Summerton',1)
