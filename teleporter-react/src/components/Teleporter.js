@@ -60,7 +60,7 @@ Teleporter.prototype.loopPossibleFromCityUtil = function(vertex, visited, parent
   return false
 }
 
-Teleporter.prototype.checkJumps = function(vertex, jumps) {
+Teleporter.prototype.citiesWithinJumps = function(vertex, jumps) {
   this.cityData.cityList.clear()
   this.cityData.cityListCacheSize = 0
   this.cityData.origin = vertex
@@ -80,7 +80,6 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
 }
 
 Teleporter.prototype.parseInput = function(input) {
-  console.log('parsing input ', input)
   const lines = input.split('\n')
   let cities = new Set()
   let cityMap = []
@@ -98,6 +97,7 @@ Teleporter.prototype.parseInput = function(input) {
   })
   cities.forEach( c => this.addVertex(c))
   cityMap.map( m => this.addEdge(m[0], m[1]))
+  console.log('input parsed:',this.cityData.adjList)
 }
 
 Teleporter.prototype.clearData = function() {

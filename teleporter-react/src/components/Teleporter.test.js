@@ -42,15 +42,15 @@ test('parseInput:: initial citymap test data', () => {
   expect(teleporter.cityData.adjList).toEqual(expectedAdjList)
 })
 
-test('checkJumps:: 1 jump of Summerton', () => {
+test('citiesWithinJumps:: 1 jump of Summerton', () => {
   const expected = new Set(['Springton', 'Hemingway'])
-  const result = teleporter.checkJumps('Summerton',1)
+  const result = teleporter.citiesWithinJumps('Summerton',1)
   expect(result).toEqual(expected)
 })
 
-test('checkJumps:: 2 jumps of Summerton', () => {
+test('citiesWithinJumps:: 2 jumps of Summerton', () => {
   const expected = new Set(['Springton', 'Hemingway', 'Chesterfield', 'Fortuna'])
-  const result = teleporter.checkJumps('Summerton',2)
+  const result = teleporter.citiesWithinJumps('Summerton',2)
   expect(result).toEqual(expected)
 })
 
