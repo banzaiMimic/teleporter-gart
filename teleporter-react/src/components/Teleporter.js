@@ -23,8 +23,7 @@ Teleporter.prototype.citiesConnect = function(origin, destination) {
   const visited = {}
   nodes = nodes.filter(city => city !== origin)
   nodes.unshift(origin)
-  this.citiesConnectUtil(nodes[0], visited, destination)
-  console.log('cities connect : ' + !this.search)
+  return this.citiesConnectUtil(nodes[0], visited, destination)
 }
 
 Teleporter.prototype.citiesConnectUtil = function(vertex, visited, destination) {
@@ -37,10 +36,12 @@ Teleporter.prototype.citiesConnectUtil = function(vertex, visited, destination) 
       if(neighbors.includes(destination)) {
         console.log('found ' + destination + ' returning true...')
         this.search = false
-      }
-      this.citiesConnectUtil(neighbors[i], visited, destination)
+        return true
+      } 
+      return this.citiesConnectUtil(neighbors[i], visited, destination)
     }
   }
+  return false
 }
 
 Teleporter.prototype.loopPossible = function(origin) {
