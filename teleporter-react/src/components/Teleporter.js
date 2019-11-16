@@ -23,15 +23,11 @@ Teleporter.prototype.citiesConnect = function(origin, destination) {
   const visited = {}
   nodes = nodes.filter(city => city !== origin)
   nodes.unshift(origin)
-  this.depthUtil(nodes[0], visited, destination)
-  // for( let i=0; i<nodes.length && this.search; i++) {
-  //   console.log('traversing remaining nodes... ' + i)
-  //   this.depthUtil(nodes[i], visited, destination)
-  // }
+  this.citiesConnectUtil(nodes[0], visited, destination)
   console.log('cities connect : ' + !this.search)
 }
 
-Teleporter.prototype.depthUtil = function(vertex, visited, destination) {
+Teleporter.prototype.citiesConnectUtil = function(vertex, visited, destination) {
   if(!visited[vertex]) {
     visited[vertex] = true
     console.log(vertex, visited)
@@ -42,9 +38,39 @@ Teleporter.prototype.depthUtil = function(vertex, visited, destination) {
         console.log('found ' + destination + ' returning true...')
         this.search = false
       }
-      this.depthUtil(neighbors[i], visited, destination)
+      this.citiesConnectUtil(neighbors[i], visited, destination)
     }
   }
+}
+
+Teleporter.prototype.loopPossible = function(origin) {
+  this.jump.origin = origin
+  this.jump.previousCity = origin
+  this.search = true
+  let nodes = Object.keys(this.adjList)
+  const visited = {}
+  const recStack = {}
+  nodes = nodes.filter(city => city !== origin)
+  nodes.unshift(origin)
+  console.log('checking if loop possible from ', origin)
+  this.loopPossibleUtil(nodes[0], visited, -1)
+  console.log('visited :', visited)
+  console.log('loop possible : ' + !this.search)
+}
+
+Teleporter.prototype.loopPossibleUtil = function(vertex, visited, parent) {
+  visited[vertex] = true
+  console.log('visited : ', visited)
+  this.adjList[vertex].map( (destination) => {
+    if(!visited[destination]) {
+      console.log('heading to : ' + destination)
+      visited[destination] = true
+      this.loopPossibleUtil(destination, visited, vertex)
+    } else if (destination !== parent && destination === this.jump.origin) {
+      this.search = false
+      console.log('already visited ' + destination + ' that is equal to origin ' + this.jump.origin + ' loop found ?')
+    }
+  })
 }
 
 Teleporter.prototype.checkJumps = function(vertex, jumps) {
@@ -78,6 +104,16 @@ Teleporter.prototype.addDummyData = function() {
   this.addVertex('Oaktown')
   this.addVertex('Los Amigos')
 
+  //custom
+  this.addVertex('B')
+  this.addVertex('C')
+  this.addVertex('D')
+  this.addVertex('E')
+  this.addEdge('B', 'C')
+  this.addEdge('C', 'D')
+  this.addEdge('D', 'E')
+  //this.addEdge('E', 'B')
+
   this.addEdge('Fortuna', 'Hemingway')
   this.addEdge('Fortuna', 'Atlantis')
   this.addEdge('Hemingway', 'Chesterfield')
@@ -94,6 +130,7 @@ export function Teleporter() {
   this.search = false
   this.jump = {
     cityList: new Set(),
-    origin: ''
+    origin: '',
+    previousCity: ''
   }
 }
