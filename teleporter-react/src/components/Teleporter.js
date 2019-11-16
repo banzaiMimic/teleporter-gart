@@ -37,20 +37,20 @@ Teleporter.prototype.citiesConnectUtil = function(vertex, visited, destination) 
   return false
 }
 
-Teleporter.prototype.loopPossible = function(origin) {
+Teleporter.prototype.loopPossibleFromCity = function(origin) {
   this.cityData.origin = origin
   this.cityData.found = false
   const visited = {}
-  this.loopPossibleUtil(origin, visited, -1)
+  this.loopPossibleFromCityUtil(origin, visited, -1)
   return this.cityData.found
 }
 
-Teleporter.prototype.loopPossibleUtil = function(vertex, visited, parent) {
+Teleporter.prototype.loopPossibleFromCityUtil = function(vertex, visited, parent) {
   visited[vertex] = true
   this.cityData.adjList[vertex].map( (destination) => {
     if(!visited[destination]) {
       visited[destination] = true
-      return this.loopPossibleUtil(destination, visited, vertex)
+      return this.loopPossibleFromCityUtil(destination, visited, vertex)
     } else if (destination !== parent && destination === this.cityData.origin) {
       this.cityData.found = true
       return true
@@ -76,7 +76,6 @@ Teleporter.prototype.checkJumps = function(vertex, jumps) {
     }
   }
   return this.cityData.cityList
-
 }
 
 Teleporter.prototype.addDummyData = function() {
