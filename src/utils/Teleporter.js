@@ -117,6 +117,10 @@ Teleporter.prototype.parseInput = function(input) {
   return this.runQueries()
 }
 
+Teleporter.prototype.init = function(parsedInput) {
+  
+}
+
 Teleporter.prototype.parseGraphData = function() {
   const keys = Object.keys(this.cityData.adjList)
   let graphData = `graph LR;\n`
