@@ -13,7 +13,7 @@ test('Load Default Input, Submit, Clear functionality snapshot tests', () => {
   const btnLoadDefaultInput = component.root.findAllByType('input')[2].props
   const btnSubmit = component.root.findAllByType('input')[0].props
   const btnClear = component.root.findAllByType('input')[1].props
-  
+
   btnLoadDefaultInput.onClick(e)
   tree = component.toJSON()
   expect(tree).toMatchSnapshot()
@@ -27,6 +27,5 @@ test('Load Default Input, Submit, Clear functionality snapshot tests', () => {
   btnClear.onClick(e)
   tree = component.toJSON()
   expect(tree).toMatchSnapshot()
-
 
 })
