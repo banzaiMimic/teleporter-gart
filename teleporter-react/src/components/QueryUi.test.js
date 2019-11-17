@@ -8,13 +8,14 @@ test('Load Default Input, Submit, Clear functionality snapshot tests', () => {
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 
-  // trigger loadDefaultInput
+  // trigger loadInput
   const e = { preventDefault: jest.fn() }
-  const btnLoadDefaultInput = component.root.findAllByType('input')[2].props
+  const unformattedInput = 'unformatted input...'
+  const btnloadInput = component.root.findAllByType('input')[2].props
   const btnSubmit = component.root.findAllByType('input')[0].props
   const btnClear = component.root.findAllByType('input')[1].props
 
-  btnLoadDefaultInput.onClick(e)
+  btnloadInput.onClick()
   tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 
@@ -24,8 +25,11 @@ test('Load Default Input, Submit, Clear functionality snapshot tests', () => {
   expect(tree).toMatchSnapshot()
 
   // trigger clear
-  btnClear.onClick(e)
+  btnClear.onClick()
   tree = component.toJSON()
   expect(tree).toMatchSnapshot()
+
+  // trigger error on input
+  
 
 })

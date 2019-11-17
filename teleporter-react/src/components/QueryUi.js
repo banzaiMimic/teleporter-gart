@@ -48,7 +48,7 @@ class QueryUi extends React.Component {
     })
   }
 
-  loadDefaultInput() {
+  loadInput() {
     this.clear()
     this.setState({
       showInstructions: false,
@@ -72,7 +72,7 @@ class QueryUi extends React.Component {
           {this.state.output.length === 0 && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
         </form>
         <input onClick={() => this.clear()} className="btn-submit" type="submit" value="Clear" />
-        <input onClick={() => this.loadDefaultInput()} className="btn-submit" type="submit" value="Load Default Input" />
+        <input onClick={() => this.loadInput()} className="btn-submit" type="submit" value="Load Default Input" />
         
         <h3>Output:</h3>
         <ul>
