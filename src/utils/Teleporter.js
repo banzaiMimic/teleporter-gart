@@ -92,13 +92,13 @@ Teleporter.prototype.getGraphAsText = function() {
   return this.cityData.graphModel = graphData
 }
 
-// populates this.output from queries ran from input
+// returns formatted output array from queries ran from parsedInput.queryData obj
 Teleporter.prototype.runQueries = function(queryData) {
-  this.output = []
-  queryData.citiesWithinJumps.map( cwjQuery => this.output.push( `cities from ${cwjQuery[0]} in ${cwjQuery[1]} jumps: ${[...this.citiesWithinJumps(cwjQuery[0], cwjQuery[1])]}`))
-  queryData.citiesConnect.map( ccQuery => this.output.push( `can I teleport from ${ccQuery[0]} to ${ccQuery[1]}: ${this.citiesConnect(ccQuery[0], ccQuery[1]) ? 'yes' : 'no'}`))
-  queryData.loopPossibleFromCity.map( lpQuery => this.output.push( `loop possible from ${lpQuery}: ${this.loopPossibleFromCity(lpQuery) ? 'yes' : 'no'}`))
-  return this.output
+  let output = []
+  queryData.citiesWithinJumps.map( cwjQuery => output.push( `cities from ${cwjQuery[0]} in ${cwjQuery[1]} jumps: ${[...this.citiesWithinJumps(cwjQuery[0], cwjQuery[1])]}`))
+  queryData.citiesConnect.map( ccQuery => output.push( `can I teleport from ${ccQuery[0]} to ${ccQuery[1]}: ${this.citiesConnect(ccQuery[0], ccQuery[1]) ? 'yes' : 'no'}`))
+  queryData.loopPossibleFromCity.map( lpQuery => output.push( `loop possible from ${lpQuery}: ${this.loopPossibleFromCity(lpQuery) ? 'yes' : 'no'}`))
+  return output
 }
 
 Teleporter.prototype.clearData = function() {
@@ -111,16 +111,6 @@ Teleporter.prototype.clearData = function() {
     origin: '',
     graphModel: ''
   }
-  this.queryData = {
-    citiesWithinJumps: [],
-    citiesConnect: [],
-    loopPossibleFromCity: []
-  }
-  this.output = []
-  this.error = {
-    hasError: false,
-    line: ''
-  }
 }
 
 export function Teleporter() {
@@ -132,15 +122,5 @@ export function Teleporter() {
     found: false,
     origin: '',
     graphModel: ''
-  }
-  this.queryData = {
-    citiesWithinJumps: [],
-    citiesConnect: [],
-    loopPossibleFromCity: []
-  }
-  this.output = []
-  this.error = {
-    hasError: false,
-    line: ''
   }
 }
