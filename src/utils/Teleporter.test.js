@@ -18,8 +18,7 @@ cities from Summerton in 2 jumps
 can I teleport from Springton to Atlantis
 can I teleport from Oaktown to Atlantis
 loop possible from Oaktown
-loop possible from Fortuna
-` 
+loop possible from Fortuna`
 
 beforeAll( () => {
   // populate teleporter with test data
@@ -47,7 +46,7 @@ test('parseInput:: initial citymap test data', () => {
   expectedAdjList['Summerton'] = ['Springton', 'Hemingway']
   expect(teleporter.cityData.adjList).toEqual(expectedAdjList)
 })
-
+ 
 test('runQueries:: queries run and output correctly', () => {
   const expectedOutput = [ 'cities from Summerton in 1 jumps: Springton,Hemingway',
   'cities from Summerton in 2 jumps: Springton,Hemingway,Chesterfield,Fortuna',

@@ -109,6 +109,9 @@ Teleporter.prototype.parseInput = function(input) {
     }
     return false
   })
+  if(this.error.hasError) { 
+    return false 
+  }
   cities.forEach( c => this.addVertex(c))
   cityMap.map( m => this.addEdge(m[0], m[1]))
   return this.runQueries()
