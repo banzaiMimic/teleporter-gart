@@ -117,8 +117,9 @@ Teleporter.prototype.parseInput = function(input) {
   return this.runQueries()
 }
 
-Teleporter.prototype.init = function(parsedInput) {
-  
+Teleporter.prototype.build = function(parsedInput) {
+  parsedInput.cities.forEach( c => this.addVertex(c))
+  parsedInput.cityMap.map( m => this.addEdge(m[0], m[1]))
 }
 
 Teleporter.prototype.parseGraphData = function() {
@@ -129,11 +130,11 @@ Teleporter.prototype.parseGraphData = function() {
 }
 
 // populates this.output from queries ran from input
-Teleporter.prototype.runQueries = function() {
+Teleporter.prototype.runQueries = function(queryData) {
   this.output = []
-  this.queryData.citiesWithinJumps.map( cwjQuery => this.output.push( `cities from ${cwjQuery[0]} in ${cwjQuery[1]} jumps: ${[...this.citiesWithinJumps(cwjQuery[0], cwjQuery[1])]}`))
-  this.queryData.citiesConnect.map( ccQuery => this.output.push( `can I teleport from ${ccQuery[0]} to ${ccQuery[1]}: ${this.citiesConnect(ccQuery[0], ccQuery[1]) ? 'yes' : 'no'}`))
-  this.queryData.loopPossibleFromCity.map( lpQuery => this.output.push( `loop possible from ${lpQuery}: ${this.loopPossibleFromCity(lpQuery) ? 'yes' : 'no'}`))
+  queryData.citiesWithinJumps.map( cwjQuery => this.output.push( `cities from ${cwjQuery[0]} in ${cwjQuery[1]} jumps: ${[...this.citiesWithinJumps(cwjQuery[0], cwjQuery[1])]}`))
+  queryData.citiesConnect.map( ccQuery => this.output.push( `can I teleport from ${ccQuery[0]} to ${ccQuery[1]}: ${this.citiesConnect(ccQuery[0], ccQuery[1]) ? 'yes' : 'no'}`))
+  queryData.loopPossibleFromCity.map( lpQuery => this.output.push( `loop possible from ${lpQuery}: ${this.loopPossibleFromCity(lpQuery) ? 'yes' : 'no'}`))
   return this.output
 }
 

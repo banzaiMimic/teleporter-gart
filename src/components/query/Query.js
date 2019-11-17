@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Teleporter } from '../../utils/Teleporter'
+import { parseInput } from '../../utils/Parser'
 import CityGraph from './CityGraph'
 import ErrorMessage from './ErrorMessage'
 import * as Constants from '../../constants'
@@ -22,8 +23,12 @@ class Query extends React.Component {
 
   submit(event) {
     event.preventDefault()
+    const teleporterData = parseInput(this.state.teleporterInput)
+    this.state.teleporter.build(teleporterData)
+    const output = this.state.teleporter.runQueries(teleporterData.queryData)
+
     this.setState( { 
-      output: this.state.teleporter.parseInput(this.state.teleporterInput),
+      output,
       graphModel: this.state.teleporter.parseGraphData(),
       showInstructions: false,
       errorLine: ''

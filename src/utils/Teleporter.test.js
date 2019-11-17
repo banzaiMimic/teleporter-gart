@@ -1,4 +1,5 @@
 import { Teleporter } from './Teleporter'
+import { parseInput } from './Parser'
 
 const teleporter = new Teleporter()
 const testInput = `Fortuna - Hemingway
@@ -19,42 +20,26 @@ can I teleport from Springton to Atlantis
 can I teleport from Oaktown to Atlantis
 loop possible from Oaktown
 loop possible from Fortuna`
+const teleporterData = parseInput(testInput)
 
 beforeAll( () => {
   // populate teleporter with test data
-  teleporter.parseInput(testInput)
+  teleporter.build(teleporterData)
 })
 
 afterAll( () => {
   teleporter.clearData()
 })
-
-test('parseInput:: initial citymap test data', () => {
-  let expectedAdjList = {}
-  expectedAdjList['Fortuna'] = ['Hemingway', 'Atlantis']
-  expectedAdjList['Hemingway'] = ['Fortuna', 'Chesterfield', 'Summerton']
-  expectedAdjList['Atlantis'] = ['Fortuna']
-  expectedAdjList['B'] = ['C']
-  expectedAdjList['C'] = ['B', 'D']
-  expectedAdjList['Chesterfield'] = ['Hemingway', 'Springton']
-  expectedAdjList['D'] = ['C', 'E']
-  expectedAdjList['E'] = ['D']
-  expectedAdjList['Springton'] = ['Chesterfield', 'Summerton']
-  expectedAdjList['Los Amigos'] = ['Paristown', 'Oaktown']
-  expectedAdjList['Paristown'] = ['Los Amigos', 'Oaktown']
-  expectedAdjList['Oaktown'] = ['Paristown', 'Los Amigos']
-  expectedAdjList['Summerton'] = ['Springton', 'Hemingway']
-  expect(teleporter.cityData.adjList).toEqual(expectedAdjList)
-})
  
 test('runQueries:: queries run and output correctly', () => {
+  const output = teleporter.runQueries(teleporterData.queryData)
   const expectedOutput = [ 'cities from Summerton in 1 jumps: Springton,Hemingway',
   'cities from Summerton in 2 jumps: Springton,Hemingway,Chesterfield,Fortuna',
   'can I teleport from Springton to Atlantis: yes',
   'can I teleport from Oaktown to Atlantis: no',
   'loop possible from Oaktown: yes',
   'loop possible from Fortuna: no' ]
-  expect(teleporter.output).toEqual(expectedOutput)
+  expect(output).toEqual(expectedOutput)
 })
 
 test('citiesWithinJumps:: 1 jump of Summerton', () => {
@@ -91,12 +76,4 @@ test('loopPossibleFromCity:: D', () => {
 
 test('loopPossibleFromCity:: Chesterfield', () => {
   expect( teleporter.loopPossibleFromCity('Chesterfield') ).toEqual(true)
-})
-
-test('input with incorrect formatting should store error information', () => {
-  teleporter.clearData()
-  const errInput = 'incorrect input format...'
-  teleporter.parseInput(errInput)
-  expect(teleporter.error.hasError).toEqual(true)
-  expect(teleporter.error.line).toEqual(errInput)
 })
