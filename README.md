@@ -1,5 +1,5 @@
 # teleporter-gart
-teleporter-gart demo project
+teleporter demo project
 
 [View project demo live](https://teleporter-gart.firebaseapp.com)
 

@@ -1,17 +1,17 @@
-teleporter-react/node_modules
-teleporter-react/.pnp
-teleporter-react/.pnp.js
+/node_modules
+/.pnp
+/.pnp.js
 
-teleporter-react/coverage
+/coverage
 
-teleporter-react/build
+/build
 
-teleporter-react/.DS_Store
-teleporter-react/.env
+/.DS_Store
+/.env
 
-teleporter-react/npm-debug.log*
-teleporter-react/yarn-debug.log*
-teleporter-react/yarn-error.log*
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
 
-teleporter-react/firebase-debug.log
-teleporter-react/.firebase
+/firebase-debug.log
+/.firebase
