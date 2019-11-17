@@ -1,10 +1,15 @@
 # teleporter-gart
 teleporter demo project
 
-[View project demo live](https://teleporter-gart.firebaseapp.com)
+[View live demo](https://teleporter-gart.firebaseapp.com)
 
-## running locally
+## local development
 ```
 npm i
 npm run start
+```
+
+## tests
+```
+npm run test
 ```
