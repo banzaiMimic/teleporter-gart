@@ -1,5 +1,5 @@
 # teleporter-gart
-teleporter demo project
+JavaScript (React) project demo hosted with firebase
 
 [View live demo](https://teleporter-gart.firebaseapp.com)
 
