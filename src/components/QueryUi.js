@@ -28,11 +28,11 @@ class QueryUi extends React.Component {
       showInstructions: false,
       errorLine: ''
     }, () => {
-      const err = this.state.teleporter.error.hasError
-      if(err) {
+      const err = this.state.teleporter.error
+      if(err.hasError) {
         this.setState({ 
           showInstructions: true,
-          errorLine: this.state.teleporter.error.line
+          errorLine: err.line
         })
         this.clear()
       }
@@ -57,19 +57,25 @@ class QueryUi extends React.Component {
   }
 
   render() {
-    const output = this.state.output
-    const data = this.state.graphModel
+    const { 
+      output, 
+      graphModel, 
+      errorLine,
+      showInstructions,
+      teleporterInput
+    } = this.state
+    
     return(
       <>
-        <CityGraph data={data}/>
+        <CityGraph data={graphModel}/>
         <h3>Input:</h3>
-        {this.state.showInstructions && <ErrorMessage errorLine={this.state.errorLine} />}
+        {showInstructions && <ErrorMessage errorLine={errorLine} />}
         <form>
           <textarea cols={50} rows={16}
-            value={this.state.teleporterInput}
+            value={teleporterInput}
             onChange={(e) => this.onInputChange(e)}
           />
-          {this.state.output.length === 0 && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
+          {output.length === 0 && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
         </form>
         <input onClick={() => this.clear()} className="btn-submit" type="submit" value="Clear" />
         <input onClick={() => this.loadDefaultInput()} className="btn-submit" type="submit" value="Load Default Input" />
