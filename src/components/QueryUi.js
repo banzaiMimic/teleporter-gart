@@ -3,6 +3,7 @@ import React from 'react'
 import { Teleporter } from './Teleporter'
 import CityGraph from './CityGraph'
 import ErrorMessage from './ErrorMessage'
+import * as Constants from '../constants'
 
 class QueryUi extends React.Component {
 
@@ -47,25 +48,11 @@ class QueryUi extends React.Component {
     })
   }
 
-  loadInput() {
+  loadDefaultInput() {
     this.clear()
     this.setState({
       showInstructions: false,
-      teleporterInput: `Fortuna - Hemingway
-Fortuna - Atlantis
-Hemingway - Chesterfield
-Chesterfield - Springton
-Los Amigos - Paristown
-Paristown - Oaktown
-Los Amigos - Oaktown
-Summerton - Springton
-Summerton - Hemingway
-cities from Summerton in 1 jumps
-cities from Summerton in 2 jumps
-can I teleport from Springton to Atlantis
-can I teleport from Oaktown to Atlantis
-loop possible from Oaktown
-loop possible from Fortuna`
+      teleporterInput: Constants.DEFAULT_INPUT
     })
   }
 
@@ -85,7 +72,7 @@ loop possible from Fortuna`
           {this.state.output.length === 0 && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
         </form>
         <input onClick={() => this.clear()} className="btn-submit" type="submit" value="Clear" />
-        <input onClick={() => this.loadInput()} className="btn-submit" type="submit" value="Load Default Input" />
+        <input onClick={() => this.loadDefaultInput()} className="btn-submit" type="submit" value="Load Default Input" />
         
         <h3>Output:</h3>
         <ul>
