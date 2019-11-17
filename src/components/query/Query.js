@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Teleporter } from '../utils/Teleporter'
-import CityGraph from './CityGraph'
-import ErrorMessage from './ErrorMessage'
-import * as Constants from '../constants'
+import { Teleporter } from '../../utils/Teleporter'
+import CityGraph from '../CityGraph'
+import ErrorMessage from '../ErrorMessage'
+import * as Constants from '../../constants'
 
-class QueryUi extends React.Component {
+class Query extends React.Component {
 
   state = {
     teleporter: new Teleporter(),
@@ -91,4 +91,4 @@ class QueryUi extends React.Component {
   }
 }
 
-export default QueryUi
+export default Query

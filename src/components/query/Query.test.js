@@ -1,10 +1,10 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import QueryUi from './QueryUi'
+import Query from './Query'
 
 test('Load Default Input, Submit, Clear functionality snapshot tests', () => {
-  const component = renderer.create(<QueryUi />)
+  const component = renderer.create(<Query />)
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 

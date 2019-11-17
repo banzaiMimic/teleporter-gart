@@ -1,14 +1,11 @@
 import React from 'react'
 
 import './App.css'
-import QueryUi from './components/QueryUi'
+import Query from './components/query/Query'
 
 function App() {
   return (
-    <>
-      <p>teleporter-demo</p>
-      <QueryUi />
-    </>
+    <Query />
   )
 }
 
