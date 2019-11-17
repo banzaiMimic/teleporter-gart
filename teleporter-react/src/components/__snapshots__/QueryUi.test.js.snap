@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Load Default Input, Submit, Clear functionality snapshot tests 1`] = `
+Array [
+  <h3>
+    Input:
+  </h3>,
+  <form>
+    <textarea
+      cols={50}
+      onChange={[Function]}
+      rows={16}
+      value=""
+    />
+    <input
+      className="btn-submit"
+      onClick={[Function]}
+      type="submit"
+      value="Submit"
+    />
+  </form>,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Clear"
+  />,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Load Default Input"
+  />,
+  <h3>
+    Output:
+  </h3>,
+  <ul />,
+]
+`;
+
+exports[`Load Default Input, Submit, Clear functionality snapshot tests 2`] = `
+Array [
+  <h3>
+    Input:
+  </h3>,
+  <form>
+    <textarea
+      cols={50}
+      onChange={[Function]}
+      rows={16}
+      value="Fortuna - Hemingway
+Fortuna - Atlantis
+Hemingway - Chesterfield
+Chesterfield - Springton
+Los Amigos - Paristown
+Paristown - Oaktown
+Los Amigos - Oaktown
+Summerton - Springton
+Summerton - Hemingway
+cities from Summerton in 1 jumps
+cities from Summerton in 2 jumps
+can I teleport from Springton to Atlantis
+can I teleport from Oaktown to Atlantis
+loop possible from Oaktown
+loop possible from Fortuna"
+    />
+    <input
+      className="btn-submit"
+      onClick={[Function]}
+      type="submit"
+      value="Submit"
+    />
+  </form>,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Clear"
+  />,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Load Default Input"
+  />,
+  <h3>
+    Output:
+  </h3>,
+  <ul />,
+]
+`;
+
+exports[`Load Default Input, Submit, Clear functionality snapshot tests 3`] = `
+Array [
+  <div
+    className="mermaid"
+  >
+    graph LR;
+1[Fortuna]--&gt;2[Hemingway];
+1[Fortuna]--&gt;3[Atlantis];
+2[Hemingway]--&gt;1[Fortuna];
+2[Hemingway]--&gt;4[Chesterfield];
+2[Hemingway]--&gt;9[Summerton];
+3[Atlantis]--&gt;1[Fortuna];
+4[Chesterfield]--&gt;2[Hemingway];
+4[Chesterfield]--&gt;5[Springton];
+5[Springton]--&gt;4[Chesterfield];
+5[Springton]--&gt;9[Summerton];
+6[Los Amigos]--&gt;7[Paristown];
+6[Los Amigos]--&gt;8[Oaktown];
+7[Paristown]--&gt;6[Los Amigos];
+7[Paristown]--&gt;8[Oaktown];
+8[Oaktown]--&gt;7[Paristown];
+8[Oaktown]--&gt;6[Los Amigos];
+9[Summerton]--&gt;5[Springton];
+9[Summerton]--&gt;2[Hemingway];
+
+  </div>,
+  <h3>
+    Input:
+  </h3>,
+  <form>
+    <textarea
+      cols={50}
+      onChange={[Function]}
+      rows={16}
+      value="Fortuna - Hemingway
+Fortuna - Atlantis
+Hemingway - Chesterfield
+Chesterfield - Springton
+Los Amigos - Paristown
+Paristown - Oaktown
+Los Amigos - Oaktown
+Summerton - Springton
+Summerton - Hemingway
+cities from Summerton in 1 jumps
+cities from Summerton in 2 jumps
+can I teleport from Springton to Atlantis
+can I teleport from Oaktown to Atlantis
+loop possible from Oaktown
+loop possible from Fortuna"
+    />
+  </form>,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Clear"
+  />,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Load Default Input"
+  />,
+  <h3>
+    Output:
+  </h3>,
+  <ul>
+    <li>
+      cities from Summerton in 1 jumps: Springton,Hemingway
+    </li>
+    <li>
+      cities from Summerton in 2 jumps: Springton,Hemingway,Chesterfield,Fortuna
+    </li>
+    <li>
+      can I teleport from Springton to Atlantis: yes
+    </li>
+    <li>
+      can I teleport from Oaktown to Atlantis: no
+    </li>
+    <li>
+      loop possible from Oaktown: yes
+    </li>
+    <li>
+      loop possible from Fortuna: no
+    </li>
+  </ul>,
+]
+`;
+
+exports[`Load Default Input, Submit, Clear functionality snapshot tests 4`] = `
+Array [
+  <h3>
+    Input:
+  </h3>,
+  <form>
+    <textarea
+      cols={50}
+      onChange={[Function]}
+      rows={16}
+      value=""
+    />
+    <input
+      className="btn-submit"
+      onClick={[Function]}
+      type="submit"
+      value="Submit"
+    />
+  </form>,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Clear"
+  />,
+  <input
+    className="btn-submit"
+    onClick={[Function]}
+    type="submit"
+    value="Load Default Input"
+  />,
+  <h3>
+    Output:
+  </h3>,
+  <ul />,
+]
+`;
