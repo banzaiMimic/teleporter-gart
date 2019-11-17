@@ -31,10 +31,6 @@ Array [
     type="submit"
     value="Load Default Input"
   />,
-  <h3>
-    Output:
-  </h3>,
-  <ul />,
 ]
 `;
 
@@ -83,10 +79,6 @@ loop possible from Fortuna"
     type="submit"
     value="Load Default Input"
   />,
-  <h3>
-    Output:
-  </h3>,
-  <ul />,
 ]
 `;
 
@@ -116,6 +108,29 @@ Array [
 9[Summerton]--&gt;2[Hemingway];
 
   </div>,
+  <h3>
+    Output:
+  </h3>,
+  <ul>
+    <li>
+      cities from Summerton in 1 jumps: Springton,Hemingway
+    </li>
+    <li>
+      cities from Summerton in 2 jumps: Springton,Hemingway,Chesterfield,Fortuna
+    </li>
+    <li>
+      can I teleport from Springton to Atlantis: yes
+    </li>
+    <li>
+      can I teleport from Oaktown to Atlantis: no
+    </li>
+    <li>
+      loop possible from Oaktown: yes
+    </li>
+    <li>
+      loop possible from Fortuna: no
+    </li>
+  </ul>,
   <h3>
     Input:
   </h3>,
@@ -153,29 +168,6 @@ loop possible from Fortuna"
     type="submit"
     value="Load Default Input"
   />,
-  <h3>
-    Output:
-  </h3>,
-  <ul>
-    <li>
-      cities from Summerton in 1 jumps: Springton,Hemingway
-    </li>
-    <li>
-      cities from Summerton in 2 jumps: Springton,Hemingway,Chesterfield,Fortuna
-    </li>
-    <li>
-      can I teleport from Springton to Atlantis: yes
-    </li>
-    <li>
-      can I teleport from Oaktown to Atlantis: no
-    </li>
-    <li>
-      loop possible from Oaktown: yes
-    </li>
-    <li>
-      loop possible from Fortuna: no
-    </li>
-  </ul>,
 ]
 `;
 
@@ -210,9 +202,5 @@ Array [
     type="submit"
     value="Load Default Input"
   />,
-  <h3>
-    Output:
-  </h3>,
-  <ul />,
 ]
 `;

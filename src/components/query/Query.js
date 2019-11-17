@@ -68,6 +68,16 @@ class Query extends React.Component {
     return(
       <>
         <CityGraph data={graphModel}/>
+        {output.length > 0 && (
+          <>
+            <h3>Output:</h3>
+            <ul>
+              {output.map((line, idx) => (
+                <li key={idx}>{line}</li>
+              ))}
+            </ul>
+          </>
+        )}
         <h3>Input:</h3>
         {showInstructions && <ErrorMessage errorLine={errorLine} />}
         <form>
@@ -80,12 +90,6 @@ class Query extends React.Component {
         <input onClick={() => this.clear()} className="btn-submit" type="submit" value="Clear" />
         <input onClick={() => this.loadDefaultInput()} className="btn-submit" type="submit" value="Load Default Input" />
         
-        <h3>Output:</h3>
-        <ul>
-          {output.map((line, idx) => (
-            <li key={idx}>{line}</li>
-          ))}
-        </ul>
       </>
     )
   }
