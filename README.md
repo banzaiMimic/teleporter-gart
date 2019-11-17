@@ -13,3 +13,11 @@ npm run start
 ```
 npm run test
 ```
+
+### accepted textarea input formats
+```
+CITYX - CITYZ
+cities from CITYX in # jumps
+can I teleport from CITYX to CITYZ
+loop possible from CITYX
+```
