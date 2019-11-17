@@ -23,17 +23,18 @@ class Query extends React.Component {
 
   submit(event) {
     event.preventDefault()
-    const teleporterData = parseInput(this.state.teleporterInput)
-    this.state.teleporter.build(teleporterData)
-    const output = this.state.teleporter.runQueries(teleporterData.queryData)
+    const { teleporter, teleporterInput } = this.state
+    const teleporterData = parseInput(teleporterInput)
+    teleporter.build(teleporterData)
+    const output = teleporter.runQueries(teleporterData.queryData)
 
     this.setState( { 
       output,
-      graphModel: this.state.teleporter.parseGraphData(),
+      graphModel: teleporter.getGraphAsText(),
       showInstructions: false,
       errorLine: ''
     }, () => {
-      const err = this.state.teleporter.error
+      const err = teleporterData.error
       if(err.hasError) {
         this.setState({ 
           showInstructions: true,

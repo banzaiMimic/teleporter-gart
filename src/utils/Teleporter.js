@@ -80,49 +80,12 @@ Teleporter.prototype.citiesWithinJumps = function(vertex, jumps) {
   return this.cityData.citiesJumped
 }
 
-Teleporter.prototype.parseInput = function(input) {
-  const lines = input.split('\n')
-  let cities = new Set()
-  let cityMap = []
-  lines.map( (line) => {
-    if (line.includes('-')) {
-      const edge = line.split(' - ')
-      edge.map( c => cities.add(c) )
-      cityMap.push(edge)
-    } else if(line.includes('cities')) {
-      // citiesWithinJumps
-      let city = line.match(new RegExp('from\\s(\\w+)'))[1]
-      let jumps = line.match(new RegExp('in\\s(\\w+)'))[1]
-      this.queryData.citiesWithinJumps.push([city, jumps])
-    } else if(line.includes('can')) {
-      // citiesConnect
-      let from = line.match(new RegExp('from\\s(\\w+)'))[1]
-      let to = line.match(new RegExp('to\\s(\\w+)'))[1]
-      this.queryData.citiesConnect.push([from, to])
-    } else if(line.includes('loop')) {
-      // loopPossibleFromCity
-      let city = line.match(new RegExp('from\\s(\\w+)'))[1]
-      this.queryData.loopPossibleFromCity.push(city)
-    } else {
-      this.error.hasError = true
-      this.error.line = line
-    }
-    return false
-  })
-  if(this.error.hasError) { 
-    return false 
-  }
-  cities.forEach( c => this.addVertex(c))
-  cityMap.map( m => this.addEdge(m[0], m[1]))
-  return this.runQueries()
-}
-
 Teleporter.prototype.build = function(parsedInput) {
   parsedInput.cities.forEach( c => this.addVertex(c))
   parsedInput.cityMap.map( m => this.addEdge(m[0], m[1]))
 }
 
-Teleporter.prototype.parseGraphData = function() {
+Teleporter.prototype.getGraphAsText = function() {
   const keys = Object.keys(this.cityData.adjList)
   let graphData = `graph LR;\n`
   keys.map( key => this.cityData.adjList[key].map( neighbor => graphData += `${this.cityData.cityKeys[key]}[${key}]-->${this.cityData.cityKeys[neighbor]}[${neighbor}];\n`))
