@@ -85,7 +85,7 @@ class Query extends React.Component {
             value={teleporterInput}
             onChange={(e) => this.onInputChange(e)}
           />
-          {output.length === 0 && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
+          {!graphModel && <input onClick={(e) => this.submit(e)} className="btn-submit" type="submit" value="Submit" />}
         </form>
         <input onClick={() => this.clear()} className="btn-submit" type="submit" value="Clear" />
         <input onClick={() => this.loadDefaultInput()} className="btn-submit" type="submit" value="Load Default Input" />
