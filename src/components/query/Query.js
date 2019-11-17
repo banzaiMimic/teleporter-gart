@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Teleporter } from '../../utils/Teleporter'
-import CityGraph from '../CityGraph'
-import ErrorMessage from '../ErrorMessage'
+import CityGraph from './CityGraph'
+import ErrorMessage from './ErrorMessage'
 import * as Constants from '../../constants'
 
 class Query extends React.Component {
