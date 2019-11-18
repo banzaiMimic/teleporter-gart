@@ -1,4 +1,4 @@
-import { Teleporter } from './Teleporter'
+import Teleporter from './Teleporter'
 import { parseInput } from './Parser'
 
 const teleporter = new Teleporter()

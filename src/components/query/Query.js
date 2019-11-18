@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Teleporter } from '../../utils/Teleporter'
+import Teleporter from '../../utils/Teleporter'
 import { parseInput } from '../../utils/Parser'
 import CityGraph from './CityGraph'
 import ErrorMessage from './ErrorMessage'
