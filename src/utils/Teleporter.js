@@ -1,4 +1,4 @@
-class Teleporter {
+export default class Teleporter {
 
   constructor() {
     this._cityData = {
@@ -126,7 +126,4 @@ class Teleporter {
       graphModel: ''
     }
   }
-
 }
-
-export default Teleporter
